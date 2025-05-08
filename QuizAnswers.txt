@@ -1,0 +1,7 @@
+3. When Seq1 is run, FileGlobals.FGNumber is incremented within each individual socket, but the values are not shared between threads. This is because file globals are not shared between threads by default in TestStand. To fix this, I enabled shared file globals, incrementing the total to 15 (correct as per sequence diagram in documentation).
+
+5. The values of LNumber change within each socket, since LNumber is a local variable. In each socket, they increment to 10. This is because of the loop expression, where LNumber is incremented once during initialization and once during the while expression, as well as 4 times during the loop itself (Precondition, Pre-Expression, Post-Expression, Status Expression), which happens twice. Already running without errors.
+
+6. Since local params 1 and 2 are set to 100 in the first expression, param number 3 should evaluate to ((100 + 1) % 100) - 1 = 0. However, param 3 evaluates to -1. Not sure why??
+
+7. The sequence gets stuck in the loop because FGNumber is simply incremented once before entering, so the while statement "FileGlobals.FGNumber <= 5" is never triggered.
