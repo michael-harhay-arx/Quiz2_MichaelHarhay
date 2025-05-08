@@ -5,3 +5,5 @@
 6. Since local params 1 and 2 are set to 100 in the first expression, param number 3 should evaluate to ((100 + 1) % 100) - 1 = 0. However, param 3 evaluates to -1. Not sure why??
 
 7. The sequence gets stuck in the loop because FGNumber is simply incremented once before entering, so the while statement "FileGlobals.FGNumber <= 5" is never triggered.
+
+8. Kdiff3 could be used to compare the two files outside of TestStand? Apparently compatible with .seq files.
