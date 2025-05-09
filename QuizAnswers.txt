@@ -2,7 +2,7 @@
 
 5. The values of LNumber change within each socket, since LNumber is a local variable. In each socket, they increment to 10. This is because of the loop expression, where LNumber is incremented once during initialization and once during the while expression, as well as 4 times during the loop itself (Precondition, Pre-Expression, Post-Expression, Status Expression), which happens twice. Already running without errors.
 
-6. Since local params 1 and 2 are set to 100 in the first expression, param number 3 should evaluate to ((100 + 1) % 100) - 1 = 0. However, param 3 evaluates to -1. Not sure why??
+6. Since local params 1 and 2 are set to 100 in the first expression, param number 3 should evaluate to ((100 + 1) % 100) - 1 = 0. However, param 3 evaluates to -1. This is because the ++ operator comes after the variable.
 
 7. The sequence gets stuck in the loop because FGNumber is simply incremented once before entering, so the while statement "FileGlobals.FGNumber <= 5" is never triggered.
 
