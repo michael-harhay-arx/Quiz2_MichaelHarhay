@@ -7,3 +7,5 @@
 7. The sequence gets stuck in the loop because FGNumber is simply incremented once before entering, so the while statement "FileGlobals.FGNumber <= 5" is never triggered.
 
 8. Kdiff3 could be used to compare the two files outside of TestStand? Apparently compatible with .seq files.
+
+9. After running the action, member1 = 1, member2 = 2, member3 = 3. This is the correct output according to Lib.c

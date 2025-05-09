@@ -34,6 +34,9 @@ NI_CommonCParameterResult = CommonCParameterResult
 FCParameter = FCParameter
 FlexCStepAdditions = FCModule
 Statement = StepType
+FlexCVIStepAdditions = FCVIModule
+FCVIParameter = FCVIParameter
+TSStruct = Obj
 
 [DEF, SF]
 Seq = Objs
@@ -85,10 +88,13 @@ Requirements = Obj
 FailureAction = Num
 %NAME = "MainSequence"
 
+[DEF, SF.Seq[0].Parameters]
+ExampleStruct = "TYPE, TSStruct"
+
 [SF.Seq[0]]
 %FLG: Parameters = 4456448
 %FLG: Locals = 4194304
-%HI: Main = [1]
+%HI: Main = [2]
 %FLG: Main = 4194304
 %FLG: Setup = 4194304
 %FLG: Cleanup = 4194304
@@ -118,6 +124,8 @@ Local = "TYPE, QuizContainerDONOTUPDATEINSEQUENCE"
 %TYPE: %[0] = "Action"
 %[1] = Step
 %TYPE: %[1] = "SequenceCall"
+%[2] = Step
+%TYPE: %[2] = "Action"
 
 [SF.Seq[0].Main[0].TS]
 Id = "ID#:P/AQAX1r7RGd5ATPSx+6LD"
@@ -188,6 +196,40 @@ PNumber3 = Num
 
 [DEF, SF.Seq[0].Main[1]]
 %NAME = "Call Seq3 Main"
+
+[SF.Seq[0].Main[2].TS]
+Id = "ID#:a3N14VEs8BGjCrjKOqmvpD"
+
+[DEF, SF.Seq[0].Main[2].TS]
+SData = "TYPE, FlexCVIStepAdditions"
+
+[SF.Seq[0].Main[2].TS.SData.Call]
+LibPath = "Lib.dll"
+Func = "IncrementMembers"
+%HI: Parms = [1]
+
+[DEF, SF.Seq[0].Main[2].TS.SData.Call.Parms]
+%[0] = "TYPE, FCVIParameter"
+%[1] = "TYPE, FCVIParameter"
+
+[SF.Seq[0].Main[2].TS.SData.Call.Parms[0]]
+Name = "Return Value"
+Type = 3
+Flags = 256
+
+[SF.Seq[0].Main[2].TS.SData.Call.Parms[1]]
+Name = "VarStruct"
+Type = 5
+StructType = "TSStruct"
+NumPass = 1
+ArgVal = "Parameters.ExampleStruct"
+Flags = 256
+
+[SF.Seq[0].Main[2].TS.SData]
+ModuleSrcPath = "Lib.dll"
+
+[DEF, SF.Seq[0].Main[2]]
+%NAME = "Action"
 
 [DEF, SF.Seq[0].RTS]
 Type = Num
@@ -361,6 +403,9 @@ NI_CommonCParameterResult = "NI_CommonCParameterResult"
 FCParameter = "FCParameter"
 FlexCStepAdditions = "FlexCStepAdditions"
 Statement = "Statement"
+FlexCVIStepAdditions = "FlexCVIStepAdditions"
+FCVIParameter = "FCVIParameter"
+TSStruct = "TSStruct"
 
 [DEF, Path]
 %LOCATION = "StdTypes"
@@ -1512,4 +1557,129 @@ Common = "TYPE, CommonResults"
 %FLG: ReportText = 4194304
 %INSTFLG: ReportText = 4194304
 %INSTOVRD: Common = 4194304
+
+[DEF, FlexCVIStepAdditions]
+%LOCATION = "StdTypes"
+Call = FCVIExtCall
+ModuleSrcPath = "TYPE, Path"
+ModulePrjPath = "TYPE, Path"
+ModuleWorkspacePath = "TYPE, Path"
+CodeTemplateName = Str
+AlwaysRunInProcess = Num
+%ROOT_TYPE = True
+
+[DEF, FlexCVIStepAdditions.Call]
+LibPath = "TYPE, Path"
+Func = Str
+Parms = Objs
+ModuleType = Num
+
+[DEF, FlexCVIStepAdditions.Call.Parms]
+%EPTYPE = "TYPE, FCVIParameter"
+%FLG: %EPTYPE = 131072
+%[0] = "TYPE, FCVIParameter"
+
+[FlexCVIStepAdditions.Call]
+%HI: Parms = [0]
+ModuleType = 2
+
+[FlexCVIStepAdditions.Call.Parms[0]]
+Name = "Return Value"
+Type = 3
+
+[FlexCVIStepAdditions]
+%TIMESTAMP = 1510777612
+%VERSION = "17.0.0.184"
+%TYPELASTMOD = "17.0.0.184"
+%MINPRODVER = "17.0.0.0"
+%FLG = 24
+%TYPE_FLG = 33554436
+
+[DEF, FCVIParameter]
+%LOCATION = "StdTypes"
+Name = Str
+Type = Num
+NumType = Num
+ObjType = Num
+StructType = Str
+NumPass = Num
+StrPass = Num
+ElemPass = Num
+ArrayDimensionsSize = Objs
+StrSize = "TYPE, Expression"
+ResultAct = Num
+ArgVal = "TYPE, Expression"
+ArgDisplayVal = "TYPE, Expression"
+Flags = Num
+AdditionalResults = Obj
+UserData = Obj
+%FLG: UserData = 2097152
+%ROOT_TYPE = True
+
+[FCVIParameter]
+Name = "_notNamed"
+NumType = 4
+StrSize = "1024"
+%INSTOVRD: ResultAct = 5177368
+%INSTOVRD: Flags = 5177368
+%INSTFLG: UserData = 2097152
+%TIMESTAMP = 1510777612
+%VERSION = "17.0.0.184"
+%TYPELASTMOD = "17.0.0.184"
+%MINPRODVER = "17.0.0.0"
+%FLG = 24
+%TYPE_FLG = 33554436
+
+[DEF, FCVIParameter.ArrayDimensionsSize]
+%EPTYPE = "TYPE, Expression"
+%FLG: %EPTYPE = 131072
+
+[FCVIParameter.ArrayDimensionsSize]
+%EPTYPE = "1024"
+
+[DEF, FCVIParameter.AdditionalResults]
+Input = "TYPE, NI_CommonCParameterResult"
+Output = "TYPE, NI_CommonCParameterResult"
+
+[DEF, TSStruct]
+%LOCATION = "UserTypes"
+member1 = Num
+member2 = Num
+member3 = Num
+%ROOT_TYPE = True
+
+[TSStruct.member1]
+%NUMFMT = "%i"
+%EXTDATA = True
+
+[EXTDATA, TSStruct.member1, STRUCT]
+DataVersion = 1
+Type = 6
+
+[TSStruct.member2]
+%NUMFMT = "%i"
+%EXTDATA = True
+
+[EXTDATA, TSStruct.member2, STRUCT]
+DataVersion = 1
+Type = 6
+
+[TSStruct.member3]
+%NUMFMT = "%i"
+%EXTDATA = True
+
+[EXTDATA, TSStruct.member3, STRUCT]
+DataVersion = 1
+Type = 6
+
+[TSStruct]
+%TIMESTAMP = 1746796669
+%VERSION = "0.0.0.1"
+%TYPELASTMOD = "17.0.0.184"
+%EXTDATA = True
+
+[EXTDATA, TSStruct, STRUCT]
+AllowStructPassing = True
+DataVersion = 1
+Type = 0
 
